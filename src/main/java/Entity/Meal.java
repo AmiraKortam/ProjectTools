@@ -1,28 +1,37 @@
 package Entity;
 
+import javax.ejb.Stateless;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import Entity.Restaurant;
 
+
+@Stateless
+@Table(schema="public") 
 @Entity
 public class Meal {
 	
 	
+	@Id
+	@NotNull
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+    private int mealId;
 	
-    int mealId;
-    String name;
-    double price;
-    int restaurantID;
+    private String name;
+    private double price;
+    private int restaurantID;
     
     
     @ManyToOne
-	@JoinColumn(name="restaurantID")
-	private Restaurant restaurant;
+    @JoinColumn(name = "restaurantId")
+    private Restaurant restaurant;
     
     public Meal() {}
 
@@ -34,10 +43,7 @@ public class Meal {
         this.restaurantID=restaurantID;
     }
     
-    
-    @Id
-	@NotNull
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+   
     public int getId() {
         return mealId;
     }

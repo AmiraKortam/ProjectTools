@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+import Entity.Meal;
 
 @Stateless
 @Table(schema="public") 
@@ -21,33 +22,23 @@ public class Restaurant {
 	@Id
 	@NotNull
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-     int id;
-	 String name;
-	 int ownerID;
+	private int id;
+	private String name;
+	private int ownerID;
   
-    
-
-    //@OneToMany(targetEntity=Meal.class, mappedBy="r", fetch=FetchType.LAZY)
-    //@OneToMany(mappedBy="r")
-    //@Column
-    //@ElementCollection(targetClass=Integer.class)
-    //private Set<Meal> meals;
-    
-    
-	//@OneToMany(mappedBy = "restaurant", fetch = FetchType.LAZY)
-    //private Set<Meal> meals;
+   
+	@OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
+    private Set<Meal> meals;
 	
 	
 	@OneToMany(mappedBy = "restaurant", fetch = FetchType.EAGER)
     private Set<Order> orders;
     
     public Restaurant() {}
-    public Restaurant(int id, String name, int ownerID , Set<Order> orders/*, Set<Meal> meals*/) {
+    public Restaurant(int id, String name, int ownerID) {
         this.id = id;
         this.name = name;
         this.ownerID = ownerID;
-        this.orders = orders;
-        //this.meals = meals;
     }
     public int getId() {
         return id;
@@ -68,20 +59,18 @@ public class Restaurant {
     public void setOwnerID(int ownerID) {
         this.ownerID = ownerID;
     }
-    /*
     public Set<Meal> getMeals() {
         return meals;
     }
     public void setMeals(Set<Meal> meals) {
         this.meals = meals;
     }
-    */
     public Set<Order> getOrders() {
         return orders;
     }
-
     public void setOrders(Set<Order> orders) {
         this.orders = orders;
     }
+	
 
 }
