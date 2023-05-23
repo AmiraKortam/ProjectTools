@@ -15,7 +15,7 @@ xmlns="http://xmlns.jcp.org/xml/ns/javaee"
 <security-constraint>
 	<web-resource-collection>
 		<web-resource-name>All resources</web-resource-name>
-		<url-pattern>/api/*</url-pattern>
+		<url-pattern>task1/api/*</url-pattern>
 	</web-resource-collection>
 	<auth-constraint>
 		<role-name>Customer</role-name>
