@@ -2,11 +2,13 @@ package Entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
@@ -26,11 +28,12 @@ public class Order {
     private OrderStatus order_status;
     
   
-    private List<Item> items;
+    @Lob
+    private List<String> items;
 
     
    
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "runnerId", insertable = false, updatable = false)
     private Runner runner;
 
@@ -79,13 +82,11 @@ public class Order {
 		return runner;
 	}
 	
-	public void setItems(List<Item> items) {
+	public void setItems(List<String> items) {
 		this.items = items;
 	}
-	/*
-	public List<Item> getItems() {
-		return items;
+	public List<String> getItems() {
+		return items;
 	}
-*/
 
 }
